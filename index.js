@@ -56,7 +56,7 @@ async function run() {
     app.post("/login", async (req, res) => {
       const { email, password } = req.body;
       const isExist = await usersCollection.findOne({email});
-      if(isExist) {
+      if(!isExist) {
         return res.send({ status: false, data:{message: 'user does not exists'}})
       }
       
