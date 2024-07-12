@@ -55,12 +55,14 @@ async function run() {
 
     app.post("/login", async (req, res) => {
       const { email, password } = req.body;
+      console.log('pass form', password);
       const isExist = await usersCollection.findOne({email});
       if(!isExist) {
         return res.send({ status: false, data:{message: 'user does not exists'}})
       }
+      console.log(isExist.password);
       
-      if(isExist.password === password) {
+      if(isExist.password !== password) {
         return res.send({ status: false, data:{message: 'wrong password'}})
       }
 
